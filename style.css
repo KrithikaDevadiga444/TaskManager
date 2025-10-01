@@ -1,0 +1,316 @@
+/* ================== GENERAL STYLES ================== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Overlay for all pages */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    z-index: -1;
+}
+
+/* Container styling */
+.container {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 25px;
+    border-radius: 12px;
+    width: 500px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin: 50px auto;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ================== HOME PAGE ================== */
+body.home {
+    background: url('images/home_bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.home button {
+    width: 100%;
+    padding: 20px;
+    margin: 15px 0;
+    font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.home button:hover {
+    background: #0056b3;
+}
+
+/* ================== ADD TASK PAGE ================== */
+body.add-task {
+    background: url('images/task_header.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.task-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-input input, .task-input textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.task-input button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #28a745;
+    color: #fff;
+    cursor: pointer;
+}
+
+.task-input button:hover {
+    background: #1e7e34;
+}
+
+ul#taskList {
+    list-style: none;
+    padding: 0;
+}
+/* Diary list link styling */
+ul#diaryList li a.diary-preview {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: rgba(224, 231, 255, 0.6);
+    color: #333;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+ul#diaryList li a.diary-preview:hover {
+    background: rgba(224, 231, 255, 0.9);
+}
+
+/* Limit preview text to 2 lines */
+ul#diaryList li a.diary-preview span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;   /* show 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+ul#taskList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: #e0e7ff;
+}
+
+ul#taskList li.completed {
+    background: #d1ffd1;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.actions button {
+    margin-left: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* ================== DIARY PAGE ================== */
+body.diary, body.diary-detail {
+    background: url('images/diary_bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Buttons */
+.back-home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+.diary-preview-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.diary-preview-wrapper {
+    display: flex;
+    justify-content: space-between; /* preview on left, buttons on right */
+    align-items: center;
+}
+
+.diary-preview-wrapper .diary-preview {
+    flex: 1; /* take remaining space */
+    margin-right: 10px; /* space between preview and buttons */
+}
+
+.diary-actions {
+    display: flex;
+    gap: 5px; /* space between buttons */
+}
+
+
+.diary-actions button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;   /* makes it fully round */
+    background-color: rgba(255,255,255,0.6); /* light semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+    color: #555; /* subtle icon color */
+}
+
+.diary-actions button:hover {
+    background-color: rgba(255,255,255,0.9);
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* Specific icons (optional colors if needed) */
+.diary-actions .edit-btn {
+    color: #f0ad4e; /* light orange for edit */
+}
+
+.diary-actions .delete-btn {
+    color: #dc3545; /* light red for delete */
+}
+
+
+
+.back-home-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Diary cards container */
+.diary-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* two cards per row */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Individual diary card */
+.diary-card {
+    max-height: 70vh;          /* scroll if content too long */
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    transition: 0.3s;
+}
+
+.diary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Card content */
+.diary-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.diary-card p {
+    font-size: 14px;
+    color: #555;
+    max-height: none;          /* allow full text */
+    overflow: visible;         /* show everything */
+    text-overflow: unset;
+    white-space: pre-wrap;     /* preserve line breaks */
+}
+
+/* Diary date inside card */
+.diary-date {
+    font-size: 12px;
+    color: #888;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-style: italic;
+}
+
+/* Scrollbar styling */
+.diary-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.diary-card::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 3px;
+}
+
+/* ================== INPUTS & FORMS ================== */
+textarea, input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#addDiaryBtn {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #28a745;
+    color: #fff;
+    cursor: pointer;
+}
+
+#addDiaryBtn:hover {
+    background: #1e7e34;
+}

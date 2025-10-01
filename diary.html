@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diary / Notebook</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="diary">
+<div class="container">
+    <h1>📔 My Diary</h1>
+    <button class="back-home-btn" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+
+    <!-- Add New Entry Button -->
+    <button id="newDiaryBtn">✏️ Add New Entry</button>
+
+    <!-- New Entry Form -->
+    <div id="diaryForm" style="display:none; margin-top:15px;">
+        <input type="text" id="diaryTitle" placeholder="Title">
+        <textarea id="diaryDesc" placeholder="Write your diary here... Emojis supported 😃"></textarea>
+        <button id="addDiaryBtn">Add Entry</button>
+        <button id="cancelDiaryBtn">Cancel</button>
+    </div>
+    <!-- New Entry Form -->
+<div id="diaryForm" class="diary-entry-form" style="display:none; margin-top:20px;">
+    <input type="text" id="diaryTitle" placeholder="Title">
+    <textarea id="diaryDesc" placeholder="Write your diary here... Emojis supported 😃"></textarea>
+    <div class="diary-form-buttons">
+        <button id="addDiaryBtn">Add Entry</button>
+        <button id="cancelDiaryBtn">Cancel</button>
+    </div>
+</div>
+
+
+    <!-- Diary List -->
+    <ul id="diaryList" style="margin-top:20px;"></ul>
+</div>
+
+<script src="script.js"></script>
+<script>
+renderDiary();
+</script>
+</body>
+</html>

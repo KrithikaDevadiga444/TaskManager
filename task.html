@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task List</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Task List 📋</h1>
+    <button onclick="window.location.href='index.html'">Add New Task</button>
+    <button onclick="window.location.href='diary.html'">Go to Diary 📔</button>
+
+    <div class="progress-container">
+        <h3>Progress</h3>
+        <div class="progress-bar">
+            <div id="progressFill">0%</div>
+        </div>
+    </div>
+
+    <div class="filter">
+        <select id="filterStatus">
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+        </select>
+    </div>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script src="script.js"></script>
+<script>
+renderTasks();
+</script>
+</body>
+</html>

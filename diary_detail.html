@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diary Entry Detail</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="diary">
+    
+<div class="container">
+    <h1>Diary Entry</h1>
+    <div id="diaryDetails" class="diary-card" style="padding:20px;"></div>
+    <br>
+    <button class="back-home-btn" onclick="window.location.href='diary.html'">🏠 Back</button>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+let diary = JSON.parse(localStorage.getItem("diary")) || [];
+const entry = diary.find(e => e.id == id);
+
+const detailsDiv = document.getElementById("diaryDetails");
+
+if (entry) {
+    detailsDiv.innerHTML = `
+        <h2>📌 ${entry.title}</h2>
+        <p>${entry.desc}</p>
+        <p class="diary-date">🗓️ ${entry.date || new Date(parseInt(entry.id)).toLocaleDateString()}</p>
+    `;
+} else {
+    detailsDiv.innerHTML = "<p>Entry not found!</p>";
+}
+</script>
+</body>
+</html>
