@@ -26,14 +26,13 @@ function renderTasks() {
                 <button onclick="deleteTask(${task.id})">🗑️</button>
             </div>
         `;
-
         taskList.appendChild(li);
     });
 
-    // update progress after rendering tasks
     updateProgress();
 }
 
+// Smooth progress + full green glow
 function updateProgress() {
     const total = tasks.length;
     const completed = tasks.filter(t => t.completed).length;
@@ -45,6 +44,13 @@ function updateProgress() {
     if (progressBar && progressText) {
         progressBar.style.width = percent + "%";
         progressText.textContent = `${percent}% completed (${completed}/${total})`;
+
+        // add glow when 100%
+        if(percent === 100) {
+            progressBar.classList.add('full');
+        } else {
+            progressBar.classList.remove('full');
+        }
     }
 }
 
@@ -65,15 +71,14 @@ function editTask(id) {
     if (task) {
         const newName = prompt("Edit Task Name:", task.name);
         const newDesc = prompt("Edit Task Description:", task.desc);
-
         if (newName !== null && newName.trim() !== "") task.name = newName;
         if (newDesc !== null) task.desc = newDesc;
-
         saveTasks();
         renderTasks();
     }
 }
 
+// Add new task
 if (addTaskBtn) {
     addTaskBtn.addEventListener('click', () => {
         if (taskName.value.trim() === '') return alert('Enter task name');
@@ -92,6 +97,8 @@ if (addTaskBtn) {
 }
 
 renderTasks();
+
+
 
 
 // ================== DIARY ==================

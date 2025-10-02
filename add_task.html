@@ -12,20 +12,18 @@
     <h1>📝 Task Manager</h1>
     <button class="back-home-btn" onclick="window.location.href='index.html'">🏠 Back to Home</button>
 
-
-    
-
     <!-- Task Form -->
     <div class="task-input">
         <input type="text" id="taskName" placeholder="Task Name">
         <textarea id="taskDesc" placeholder="Task Description"></textarea>
         <button id="addTaskBtn">Add Task</button>
     </div>
-<!-- Progress Bar -->
-<div class="progress-container">
-  <div id="progressBar" class="progress-bar"></div>
-</div>
-<p id="progressText">0% completed</p>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div id="progressBar"></div>
+    </div>
+    <p id="progressText">0% completed</p>
 
     <!-- Task List -->
     <ul id="taskList"></ul>
@@ -33,7 +31,7 @@
 
 <script src="script.js"></script>
 <script>
-renderTasks();
+renderTasks(); // ensure tasks are loaded on page open
 </script>
 </body>
 </html>
