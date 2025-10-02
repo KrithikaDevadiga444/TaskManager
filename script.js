@@ -22,12 +22,30 @@ function renderTasks() {
             <span>${task.name} - ${task.desc}</span>
             <div class="actions">
                 <button onclick="toggleComplete(${task.id})">✔️</button>
+                <button onclick="editTask(${task.id})">✏️</button>
                 <button onclick="deleteTask(${task.id})">🗑️</button>
             </div>
         `;
 
         taskList.appendChild(li);
     });
+
+    // update progress after rendering tasks
+    updateProgress();
+}
+
+function updateProgress() {
+    const total = tasks.length;
+    const completed = tasks.filter(t => t.completed).length;
+    let percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+
+    if (progressBar && progressText) {
+        progressBar.style.width = percent + "%";
+        progressText.textContent = `${percent}% completed (${completed}/${total})`;
+    }
 }
 
 function toggleComplete(id) {
@@ -42,9 +60,23 @@ function deleteTask(id) {
     renderTasks();
 }
 
+function editTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        const newName = prompt("Edit Task Name:", task.name);
+        const newDesc = prompt("Edit Task Description:", task.desc);
+
+        if (newName !== null && newName.trim() !== "") task.name = newName;
+        if (newDesc !== null) task.desc = newDesc;
+
+        saveTasks();
+        renderTasks();
+    }
+}
+
 if (addTaskBtn) {
     addTaskBtn.addEventListener('click', () => {
-        if (taskName.value === '') return alert('Enter task name');
+        if (taskName.value.trim() === '') return alert('Enter task name');
         const task = { 
             id: Date.now(), 
             name: taskName.value, 
@@ -75,7 +107,7 @@ let diary = JSON.parse(localStorage.getItem('diary')) || [];
 
 // Render diary as cards
 function renderDiary() {
-    if(!diaryList) return;
+    if (!diaryList) return;
     diaryList.innerHTML = '';
 
     diary.forEach(entry => {
@@ -89,8 +121,8 @@ function renderDiary() {
                     <span>${entry.desc}</span>
                 </a>
                 <div class="diary-actions">
-                    <button class="edit-btn" data-id="${entry.id}">✏️ Edit</button>
-                    <button class="delete-btn" data-id="${entry.id}">🗑️ Delete</button>
+                    <button class="edit-btn" data-id="${entry.id}">✏️</button>
+                    <button class="delete-btn" data-id="${entry.id}">🗑️</button>
                 </div>
             </div>
         `;
@@ -102,7 +134,7 @@ function renderDiary() {
         btn.addEventListener('click', () => {
             const id = btn.getAttribute('data-id');
             const entry = diary.find(e => e.id == id);
-            if(entry){
+            if (entry) {
                 diaryForm.style.display = 'block';
                 diaryTitle.value = entry.title;
                 diaryDesc.value = entry.desc;
@@ -126,7 +158,7 @@ function renderDiary() {
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = btn.getAttribute('data-id');
-            if(confirm('Are you sure you want to delete this entry?')){
+            if (confirm('Are you sure you want to delete this entry?')) {
                 diary = diary.filter(e => e.id != id);
                 localStorage.setItem('diary', JSON.stringify(diary));
                 renderDiary();
@@ -134,8 +166,6 @@ function renderDiary() {
         });
     });
 }
-
-
 
 // Show form
 if (newDiaryBtn) newDiaryBtn.addEventListener('click', () => diaryForm.style.display = 'block');
